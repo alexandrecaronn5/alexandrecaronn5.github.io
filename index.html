@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexandre Caron — Notes</title>
+<meta name="description" content="Notes and writing in mathematical physics — Alexandre Caron, McGill University.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+
+<style>
+  :root {
+    --ink: #182428;
+    --ink-soft: #4b5a5e;
+    --paper: #F0F1EC;
+    --paper-raised: #E7E9E2;
+    --rule: #cfd3c9;
+    --accent: #3d6e68;
+    --accent-warm: #b8863a;
+
+    --font-display: 'Newsreader', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- Header / Hero ---------- */
+
+  header.hero {
+    padding: 76px 0 56px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+    opacity: 0;
+    animation: rise 0.6s ease-out forwards;
+  }
+
+  h1.name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.1rem, 5vw, 2.9rem);
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+    opacity: 0;
+    animation: rise 0.6s ease-out 0.08s forwards;
+  }
+
+  p.tagline {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0 0 40px;
+    opacity: 0;
+    animation: rise 0.6s ease-out 0.16s forwards;
+  }
+
+  .equation-panel {
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 30px 32px;
+    opacity: 0;
+    animation: rise 0.7s ease-out 0.26s forwards;
+  }
+
+  .equation-panel .eq-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+
+  .equation-panel .katex-display {
+    margin: 4px 0 0;
+  }
+
+  .equation-panel .katex {
+    font-size: 1.15em;
+    color: var(--ink);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .eyebrow, h1.name, p.tagline, .equation-panel {
+      animation: none;
+      opacity: 1;
+    }
+  }
+
+  /* ---------- Section headers ---------- */
+
+  section { padding: 56px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: none; }
+
+  h2.section-head {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  h2.section-head::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ---------- Writing list ---------- */
+
+  .entry {
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .entry:first-of-type { border-top: none; padding-top: 0; }
+
+  .entry-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .entry-meta .tag {
+    color: var(--accent);
+  }
+
+  h3.entry-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.28rem;
+    margin: 0 0 8px;
+    letter-spacing: -0.005em;
+  }
+
+  h3.entry-title a {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+  h3.entry-title a:hover { border-color: var(--ink); }
+
+  .entry-abstract {
+    color: var(--ink-soft);
+    font-size: 15px;
+    max-width: 62ch;
+    margin: 0 0 12px;
+  }
+
+  .status-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--accent-warm);
+    background: rgba(184, 134, 58, 0.1);
+    border: 1px solid rgba(184, 134, 58, 0.25);
+    border-radius: 3px;
+    padding: 4px 9px;
+  }
+
+  .status-note::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-warm);
+  }
+
+  .entry-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-decoration: none;
+    color: var(--accent);
+    border-bottom: 1px solid rgba(61, 110, 104, 0.35);
+  }
+  .entry-link:hover { border-color: var(--accent); }
+
+  /* Empty-state slot for future notes */
+  .slot {
+    padding: 22px 0;
+    border-top: 1px dashed var(--rule);
+    color: var(--ink-soft);
+    font-size: 14px;
+    font-style: italic;
+  }
+  .slot .entry-meta { font-style: normal; }
+
+  /* ---------- Contact ---------- */
+
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 14.5px;
+  }
+
+  .contact-list a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1px;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .contact-list a:hover { border-color: var(--accent); color: var(--accent); }
+
+  footer {
+    padding: 30px 0 60px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+    <header class="hero">
+      <p class="eyebrow">Mathematical &amp; High-Energy Physics — McGill University</p>
+      <h1 class="name">Alexandre Caron</h1>
+      <p class="tagline">Undergraduate notes, reports, and writing in mathematical physics — quantum field theory in curved spacetime, general relativity, and the symmetry methods that tie them together.</p>
+
+      <div class="equation-panel">
+        <div class="eq-label">Unruh temperature</div>
+        <div id="hero-eq"></div>
+      </div>
+    </header>
+
+    <section id="writing">
+      <h2 class="section-head">Writing</h2>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span>Winter 2026</span>
+          <span>·</span>
+          <span class="tag">Directed Reading Program</span>
+          <span>·</span>
+          <span>McGill Dept. of Mathematics &amp; Statistics</span>
+        </div>
+        <h3 class="entry-title"><a href="files/drp-lie-symmetries-report.pdf">Lie Symmetries and the Solvability of Ordinary Differential Equations</a></h3>
+        <p class="entry-abstract">An introductory report on how Lie groups and Lie algebras are used to solve broad classes of ordinary differential equations exactly, written with Xavier Zurowski under the supervision of Shereen Elaidi. Covers the underlying symmetry methods and the general theory of solvability.</p>
+        <div class="status-note">Pending official publication on the DRP website — posted here in the interim</div>
+        <br>
+        <a class="entry-link" href="files/drp-lie-symmetries-report.pdf">↓ Read the report (PDF)</a>
+      </div>
+
+      <div class="slot">
+        <div class="entry-meta"><span>—</span></div>
+        More notes will go here — course material from any future TA work, and the review article on the Unruh effect once it's finished.
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-head">Contact</h2>
+      <div class="contact-list">
+        <a href="mailto:alexandre.caron2@mail.mcgill.ca">alexandre.caron2@mail.mcgill.ca</a>
+        <a href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">github.com/YOUR-USERNAME</a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="wrap">Last updated August 2026</div>
+  </footer>
+
+  <script>
+    if (window.katex) {
+      katex.render(
+        "T_U = \\dfrac{\\hbar\\,a}{2\\pi c\\,k_B}",
+        document.getElementById("hero-eq"),
+        { throwOnError: false, displayMode: true }
+      );
+    }
+  </script>
+
+</body>
+</html>
